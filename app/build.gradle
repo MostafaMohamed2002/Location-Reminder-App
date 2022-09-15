@@ -1,0 +1,145 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.udacity.project4"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // App dependencies
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.annotation:annotation:1.1.0"
+
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "com.google.android.material:material:1.2.1"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Architecture Components
+    //Navigation dependencies
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0-alpha2'
+    implementation 'com.google.firebase:firebase-auth:20.0.2'
+    testImplementation project(path: ':app')
+    androidTestImplementation project(path: ':app')
+    androidTestImplementation project(path: ':app')
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.2"
+    implementation "androidx.test.espresso:espresso-idling-resource:3.3.0"
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //Room dependencies
+    implementation "androidx.room:room-ktx:2.2.6"
+    implementation "androidx.room:room-runtime:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
+
+    //Coroutines Dependencies
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
+
+    //Koin
+    implementation "org.koin:koin-android:2.2.1"
+    implementation "org.koin:koin-androidx-viewmodel:2.2.1"
+    
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:4.13.1"
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
+    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation 'com.google.truth:truth:1.1'
+    testImplementation "org.mockito:mockito-core:2.19.0"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test:core-ktx:1.3.0"
+    testImplementation "androidx.test.ext:junit-ktx:1.1.2"
+    testImplementation "androidx.test:rules:1.3.0"
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation "androidx.test:core-ktx:1.3.0"
+    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.2"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
+    androidTestImplementation "androidx.test:rules:1.3.0"
+    androidTestImplementation "androidx.room:room-testing:2.2.6"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation 'org.robolectric:annotations:4.4'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.3.0"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.3.0"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:3.3.0"
+    androidTestImplementation "junit:junit:4.13.1"
+    // Once https://issuetracker.google.com/127986458 is fixed this can be testImplementation
+    debugImplementation "androidx.fragment:fragment-testing:1.2.5"
+    implementation "androidx.test:core:1.3.0"
+    implementation "androidx.fragment:fragment:1.2.5"
+    androidTestImplementation "org.mockito:mockito-core:2.19.0"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
+    androidTestImplementation('org.koin:koin-test:2.2.1') { exclude group: 'org.mockito' }
+
+    //Maps & Geofencing
+    implementation "com.google.android.gms:play-services-location:17.1.0"
+    implementation "com.google.android.gms:play-services-maps:17.0.0"
+
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+}
